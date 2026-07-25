@@ -21,3 +21,13 @@ timeoutMs = 20000
 
 [nix]
 channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+CONTACT_TO_EMAIL = "info@bldpermit.com"
+SMTP2GO_HOST = "mail.smtp2go.com"
+SMTP2GO_PORT = "587"
+SMTP_FROM_EMAIL = "info@bldpermit.com"
+SMTP_FROM_NAME = "Team K5 Permitting Services"
+SMTP_REPLY_TO = "info@bldpermit.com"
