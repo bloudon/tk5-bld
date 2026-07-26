@@ -3,6 +3,21 @@
 # Usage:  bash deploy.sh
 set -euo pipefail
 
+# Load system-wide env vars (covers /etc/environment on Ubuntu/Debian)
+if [ -f /etc/environment ]; then
+  set -a
+  source /etc/environment
+  set +a
+fi
+
+# Also load a local .env file if one exists alongside this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/.env" ]; then
+  set -a
+  source "$SCRIPT_DIR/.env"
+  set +a
+fi
+
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Team K5 — Deploy"
