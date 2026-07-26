@@ -1,0 +1,45 @@
+# Nginx site config for Team K5
+# Place this file at: /etc/nginx/sites-available/k5
+# Then: sudo ln -s /etc/nginx/sites-available/k5 /etc/nginx/sites-enabled/
+# Then: sudo nginx -t && sudo systemctl reload nginx
+#
+# Replace:
+#   YOUR_DOMAIN  →  e.g. teamk5.com  (or the IP if no domain yet)
+#   /path/to/tk5-bld  →  absolute path to this repo on the VPS
+
+server {
+    listen 80;
+    server_name YOUR_DOMAIN www.YOUR_DOMAIN;
+
+    # ── Static frontend files ──────────────────────────────────────────────────
+    root /path/to/tk5-bld/artifacts/k5-website/dist/public;
+    index index.html;
+
+    # Serve static assets with long cache headers
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # ── API — proxy to Express ─────────────────────────────────────────────────
+    location /api/ {
+        proxy_pass         http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 30s;
+    }
+
+    # ── SPA fallback — all other routes serve index.html ──────────────────────
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+# ── HTTPS (add after running: sudo certbot --nginx -d YOUR_DOMAIN) ─────────────
+# Certbot will add the SSL block automatically. Run:
+#   sudo apt install certbot python3-certbot-nginx
+#   sudo certbot --nginx -d YOUR_DOMAIN -d www.YOUR_DOMAIN
