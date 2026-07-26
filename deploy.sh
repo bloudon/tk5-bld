@@ -9,6 +9,25 @@ echo "  Team K5 — Deploy"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
+# ── 0. Pre-flight checks ───────────────────────────────────────────────────────
+if [ -z "${DATABASE_URL:-}" ]; then
+  echo "✗ DATABASE_URL is not set."
+  echo "  Export it before running deploy.sh:"
+  echo "    export DATABASE_URL=\"postgres://user:pass@host:5432/dbname\""
+  exit 1
+fi
+
+if [ -z "${SMTP2GO_USERNAME:-}" ] || [ -z "${SMTP2GO_PASSWORD:-}" ]; then
+  echo "⚠ Warning: SMTP2GO_USERNAME or SMTP2GO_PASSWORD is not set — contact form emails will not send."
+fi
+
+if [ -z "${BLOG_ADMIN_PASSWORD:-}" ]; then
+  echo "⚠ Warning: BLOG_ADMIN_PASSWORD is not set — blog admin will use the default password."
+fi
+
+echo "✓ Pre-flight checks passed"
+echo ""
+
 # ── 1. Pull latest code ────────────────────────────────────────────────────────
 echo "▶ Pulling latest code..."
 git pull origin main
