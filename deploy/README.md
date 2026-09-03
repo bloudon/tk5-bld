@@ -5,7 +5,7 @@
 ```
 Internet → Nginx (80/443)
               ├── /api/*  → PM2: api-server (localhost:3001)
-              └── /*      → Static files (Vite build output)
+              └── /*      → Prerendered route HTML and static assets
 ```
 
 ---
@@ -75,12 +75,13 @@ If using Neon or Supabase, just paste their connection string as `DATABASE_URL` 
 ## Nginx config (one-time)
 
 ```bash
-sudo cp /var/www/k5-website/deploy/nginx-k5.conf /etc/nginx/sites-available/k5-website
+sudo cp /var/www/k5-website/nginx.conf.example /etc/nginx/sites-available/k5-website
 sudo ln -s /etc/nginx/sites-available/k5-website /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-Then add SSL with Certbot:
+Obtain one certificate covering the canonical and redirect hosts, then install
+the paths shown in `nginx.conf.example`:
 ```bash
 sudo certbot --nginx -d bldpermit.com -d www.bldpermit.com -d expeditepermit.com -d www.expeditepermit.com
 ```
@@ -96,6 +97,9 @@ cd /var/www/k5-website && bash deploy/deploy.sh
 ```
 
 That's it — pulls latest code, installs deps, rebuilds, restarts the API.
+
+The deploy exits before restart if the prerendered metadata, canonical URLs,
+sitemap, internal links, or 404 output fail verification.
 
 ---
 

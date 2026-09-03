@@ -1,28 +1,38 @@
-# Nginx site config for Team K5
-# Place this file at: /etc/nginx/sites-available/k5
-# Then: sudo ln -s /etc/nginx/sites-available/k5 /etc/nginx/sites-enabled/
-# Then: sudo nginx -t && sudo systemctl reload nginx
-#
-# Replace:
-#   YOUR_DOMAIN  →  e.g. teamk5.com  (or the IP if no domain yet)
-#   /path/to/tk5-bld  →  absolute path to this repo on the VPS
+# Nginx site config for bldpermit.com.
+# Replace /path/to/tk5-bld and certificate paths for the target VPS.
 
 server {
     listen 80;
-    server_name YOUR_DOMAIN www.YOUR_DOMAIN;
+    listen [::]:80;
+    server_name bldpermit.com www.bldpermit.com expeditepermit.com www.expeditepermit.com;
+    return 301 https://bldpermit.com$request_uri;
+}
 
-    # ── Static frontend files ──────────────────────────────────────────────────
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.bldpermit.com expeditepermit.com www.expeditepermit.com;
+    ssl_certificate /etc/letsencrypt/live/bldpermit.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bldpermit.com/privkey.pem;
+    return 301 https://bldpermit.com$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name bldpermit.com;
+    ssl_certificate /etc/letsencrypt/live/bldpermit.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bldpermit.com/privkey.pem;
+
     root /path/to/tk5-bld/artifacts/k5-website/dist/public;
     index index.html;
 
-    # Serve static assets with long cache headers
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
         try_files $uri =404;
     }
 
-    # ── API — proxy to Express ─────────────────────────────────────────────────
     location /api/ {
         proxy_pass         http://127.0.0.1:3001;
         proxy_http_version 1.1;
@@ -33,13 +43,33 @@ server {
         proxy_read_timeout 30s;
     }
 
-    # ── SPA fallback — all other routes serve index.html ──────────────────────
+    location = /api {
+        proxy_pass         http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+
+    location = / {
+        try_files /index.html =404;
+    }
+
+    location ~ ^/(about|services|pricing|blog|contact)/$ {
+        return 301 $scheme://$host/$1$is_args$args;
+    }
+
+    location ~ ^/(about|services|pricing|blog|contact)$ {
+        try_files $uri/index.html =404;
+    }
+
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ =404;
+        error_page 404 /404.html;
+    }
+
+    location = /404.html {
+        internal;
     }
 }
-
-# ── HTTPS (add after running: sudo certbot --nginx -d YOUR_DOMAIN) ─────────────
-# Certbot will add the SSL block automatically. Run:
-#   sudo apt install certbot python3-certbot-nginx
-#   sudo certbot --nginx -d YOUR_DOMAIN -d www.YOUR_DOMAIN

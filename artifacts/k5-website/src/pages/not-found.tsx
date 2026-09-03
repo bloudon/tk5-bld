@@ -12,7 +12,9 @@ export default function NotFound() {
           </div>
 
           <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+            The page you requested may have moved or no longer exists. Use the
+            navigation above to continue, or contact Team K5 for help with your
+            permit project.
           </p>
         </CardContent>
       </Card>

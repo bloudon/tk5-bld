@@ -64,10 +64,14 @@ echo "▶ Building frontend..."
 BASE_PATH=/ PORT=3000 NODE_ENV=production \
   pnpm --filter @workspace/k5-website run build
 
+echo "▶ Verifying SEO output..."
+pnpm --filter @workspace/k5-website run test:seo
+
 # ── 5. Build API server ────────────────────────────────────────────────────────
 echo ""
 echo "▶ Building API server..."
 pnpm --filter @workspace/api-server run build
+pnpm --filter @workspace/api-server run test:responses
 
 # ── 6. Restart services via PM2 ───────────────────────────────────────────────
 echo ""

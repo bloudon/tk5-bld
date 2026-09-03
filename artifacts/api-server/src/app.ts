@@ -31,4 +31,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
 
+app.use("/api", (req, res) => {
+  res.status(404).json({
+    error: "not_found",
+    message: "API endpoint not found",
+    path: req.path,
+  });
+});
+
 export default app;
