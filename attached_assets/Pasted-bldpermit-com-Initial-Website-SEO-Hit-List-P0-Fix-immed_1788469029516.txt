@@ -1,0 +1,256 @@
+bldpermit.com — Initial Website SEO Hit List
+P0 — Fix immediately
+1. Replace placeholder Replit metadata
+
+The current HTML exposes:
+
+Title: Team K5 Website
+Description: Team K5 Website — built on Replit. Update this description to reflect the app.
+
+Use this homepage metadata:
+
+Title
+
+Permit Expediting & Coordination | Team K5 C&D
+
+Description
+
+Team K5 Construction & Development Coordination manages permit expediting, inspections, e-recording, and nationwide project coordination. Serving contractors since 2003.
+
+Each route must have its own title and description.
+
+2. Establish one canonical domain
+
+The only indexable domain should be:
+
+https://bldpermit.com
+
+Add permanent, path-preserving 301 redirects:
+
+http://bldpermit.com/* → https://bldpermit.com/*
+http://www.bldpermit.com/* → https://bldpermit.com/*
+https://www.bldpermit.com/* → https://bldpermit.com/*
+http://expeditepermit.com/* → https://bldpermit.com/*
+https://expeditepermit.com/* → https://bldpermit.com/*
+https://www.expeditepermit.com/* → https://bldpermit.com/*
+
+Do not redirect teamk5.com. That belongs to Team K5 Permits & Consulting, a separate company.
+
+3. Add canonical tags
+
+Every indexable page must have a self-referencing canonical in the original HTML:
+
+<link rel="canonical" href="https://bldpermit.com/services" />
+
+Canonical URLs must use HTTPS, no www, and a consistent trailing-slash policy.
+
+4. Make public pages search-engine renderable
+
+The server currently returns a nearly empty React shell with identical metadata for every route.
+
+Implement static pre-rendering or server-side rendering for:
+
+/
+/about
+/services
+/pricing
+/blog
+/contact
+Future service, location, and article pages
+
+The original HTML response should contain the page’s title, description, canonical, H1, primary copy, and internal links without requiring JavaScript execution.
+
+5. Fix soft 404s
+
+Nonexistent URLs currently return the homepage shell with 200 OK.
+
+Required behavior:
+
+Unknown URLs return HTTP 404.
+Display a useful branded 404 page.
+The 404 page should not be included in the sitemap.
+API errors must not fall back to the React homepage.
+6. Create a real XML sitemap
+
+/sitemap.xml currently returns homepage HTML.
+
+Create a valid XML sitemap containing only canonical, public, indexable URLs.
+
+Update robots.txt:
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bldpermit.com/sitemap.xml
+P1 — Identity and measurement
+7. Clarify the company identity sitewide
+
+Use the following consistently:
+
+Display name
+
+Team K5 Construction & Development Coordination
+
+Legal name
+
+Team K5 Construction and Development Coordination, LLC
+
+Primary website
+
+https://bldpermit.com
+
+Primary phone
+
+407-469-5599
+
+The full company name should appear on:
+
+Homepage
+About page
+Contact page
+Footer
+Privacy policy
+Terms
+Page metadata
+Contact-form confirmations
+
+Avoid referring to the company only as “Team K5 Permitting,” since that can be confused with Team K5 Permits & Consulting.
+
+8. Add organization structured data
+
+Add JSON-LD to the homepage containing:
+
+name
+legalName
+alternateName
+url
+logo
+telephone
+email
+foundingDate
+Verified office information
+Only Construction & Development’s social profiles
+
+Do not link to teamk5.com or the Permits & Consulting profiles through sameAs.
+
+9. Add Google Tag Manager and GA4
+
+No GA or GTM tagging is currently detectable.
+
+Install GTM sitewide and configure a separate GA4 property for Construction & Development.
+
+Track:
+
+Page views
+Successful contact submissions as generate_lead
+Phone clicks
+Email clicks
+Contact-form starts
+Requested service
+Requested office/market
+Referring page and UTM values
+
+The lead conversion must fire after confirmed submission—not when the Submit button is clicked.
+
+10. Configure search management
+
+Set up or verify:
+
+Google Search Console Domain property for bldpermit.com
+GA4 connection to Search Console
+Bing Webmaster Tools
+Sitemap submission
+Google Business Profile website URL
+
+Use this tracked GBP link:
+
+https://bldpermit.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp
+P1 — Page quality
+11. Give every existing page unique metadata and one H1
+Page	Recommended title
+Home	Permit Expediting & Coordination | Team K5 C&D
+Services	Permit Expediting and Coordination Services | Team K5 C&D
+About	About Team K5 Construction & Development Coordination
+Pricing	Permit Service Pricing and Project Quotes | Team K5 C&D
+Blog	Florida Permitting Insights | Team K5 C&D
+Contact	Request Permit Expediting Services | Team K5 C&D
+
+Every page should have exactly one clear primary H1.
+
+12. Clean up the blog
+
+The blog is empty, but Google is seeing “Create Post.”
+
+Remove authoring controls from the public blog.
+Require authentication for all publishing functions.
+Apply noindex to administration and authentication routes.
+Do not index an empty blog.
+Publish at least three useful articles before promoting the blog in search.
+Give every article a permanent slug, title, description, canonical, author, and publication date.
+13. Add social-sharing metadata
+
+Each page should have unique:
+
+og:title
+og:description
+og:url
+og:image
+Twitter/X card metadata
+
+Create a branded 1200×630 sharing image.
+
+14. Verify contact and trust information
+
+Confirm that every displayed office is genuine and accurately labeled as either:
+
+A staffed customer-facing office, or
+A service area
+
+Verify all:
+
+Phone links
+Email links
+Contact submissions
+Thank-you state
+Office-manager details
+Privacy-policy links
+Mobile layouts
+
+Remove any example information such as john@example.com or (555) 123-4567 if it can surface anywhere publicly.
+
+P2 — Initial search architecture
+15. Break the Services page into dedicated landing pages
+
+Start with:
+
+/permit-expediting/
+/commercial-permit-expediting/
+/residential-permit-expediting/
+/inspection-scheduling/
+/e-recording-notice-of-commencement/
+/multi-site-permit-coordination/
+
+Each page needs original copy, process details, FAQs, proof, and a relevant project-intake CTA.
+
+16. Add legitimate market pages
+
+Start with the actual operating markets:
+
+/florida-permit-expediting/
+/orlando-permit-expediting/
+/tampa-permit-expediting/
+/palm-beach-permit-expediting/
+
+Do not produce city-name swap pages. Each location page needs genuine jurisdiction knowledge, services, local contact information, and internally linked resources.
+
+Done looks like
+Only https://bldpermit.com returns the new website.
+All other Construction & Development domains 301 to it.
+teamk5.com remains untouched.
+No Replit placeholder text appears in source or Google.
+Every page has unique server-delivered metadata and content.
+Invalid URLs return 404.
+/sitemap.xml is valid XML.
+GA4 records verified visits and completed leads.
+The full Construction & Development identity is consistent throughout.
+Search Console can crawl, render, and index every intended public page.
