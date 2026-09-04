@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { analyticsConsent, setAnalyticsConsent, trackCurrentPage } from "@/analytics";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { Cookie } from "lucide-react";
 
 export function AnalyticsConsent() {
   const [visible, setVisible] = useState(() => typeof window !== "undefined" && analyticsConsent() === null);
@@ -19,14 +20,46 @@ export function AnalyticsConsent() {
     setVisible(false);
   };
   return (
-    <aside className="fixed bottom-0 inset-x-0 z-[70] bg-zinc-950 text-white border-t border-zinc-700 p-4" aria-label="Analytics consent">
-      <div className="container mx-auto flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <p className="text-sm text-zinc-300 max-w-3xl">We use optional analytics to understand site use and improve our services. Analytics loads only if you accept. See our <Link href="/privacy" className="underline">Privacy Policy</Link>.</p>
-        <div className="flex gap-2 shrink-0">
-          <Button variant="outline" size="sm" onClick={() => choose(false)}>Decline</Button>
-          <Button size="sm" onClick={() => choose(true)}>Accept analytics</Button>
+    <aside
+      className="fixed bottom-4 left-4 right-4 z-[70] sm:right-auto sm:max-w-md rounded-lg border border-zinc-200 bg-white p-5 text-zinc-900 shadow-2xl"
+      aria-label="Cookie preferences"
+      role="dialog"
+      aria-modal="false"
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+          <Cookie className="h-5 w-5 text-primary" aria-hidden="true" />
+        </div>
+        <div>
+          <h2 className="font-serif text-lg font-bold">We use cookies</h2>
+          <p className="mt-1 text-sm leading-6 text-zinc-600">
+            We use optional analytics cookies to understand how visitors use our
+            website and improve our services. You can accept or reject these
+            cookies. See our{" "}
+            <Link href="/privacy" className="font-medium text-primary underline underline-offset-2">
+              Privacy Policy
+            </Link>
+            .
+          </p>
         </div>
       </div>
+      <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full sm:w-auto"
+          onClick={() => choose(false)}
+        >
+          Reject optional cookies
+        </Button>
+        <Button
+          size="sm"
+          className="w-full sm:w-auto"
+          onClick={() => choose(true)}
+        >
+          Accept cookies
+        </Button>
+        </div>
     </aside>
   );
 }
