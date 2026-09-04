@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sora:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -125,7 +125,7 @@
   --chart-5: 220 20% 15%;
 
   --app-font-sans: 'Plus Jakarta Sans', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
+  --app-font-serif: 'Sora', sans-serif;
   --app-font-mono: Menlo, monospace;
   --radius: .5rem;
   --shadow-2xs: 0px 2px 0px 0px hsl(220 20% 15% / 0.05);

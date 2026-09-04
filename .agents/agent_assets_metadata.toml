@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "T9J-kyLDRIXnr5SkiTaAG"
+uri = "file://screenshots/k5-sora-home.jpg"
+type = "image"
+title = "Team K5 hero with Sora"
+description = "Homepage preview with Sora replacing Playfair Display for headings."
+logical_id = "dad512b0-2c2e-44e9-8104-8c0ee508b099"
+content_hash = "sha256:7e99c9cea44126c6da635219177fc6485dec9ccd91b4e1f60e1706d0adca472a"
+size = 59989
+mtime_ms = 1788530825886
+storage_uri = "gcs://replit-rams-assets-janeway/rams/assets/repl:d5555e39-c6b4-42b5-91bf-11362a71245e/dad512b0-2c2e-44e9-8104-8c0ee508b099/da2ea6ca-e8f1-4164-aaaf-e706b72e5053"
+storage_version_token = "1788530832500868"
+content_type = "image/jpeg"
