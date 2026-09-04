@@ -10,9 +10,14 @@ if [ -f /etc/environment ]; then
   set +a
 fi
 
-# Also load a local .env file if one exists alongside this script
+# Load the app-specific production environment. These values intentionally
+# override /etc/environment because this VPS hosts multiple applications.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-if [ -f "$SCRIPT_DIR/.env" ]; then
+if [ -f "$SCRIPT_DIR/.env.production" ]; then
+  set -a
+  source "$SCRIPT_DIR/.env.production"
+  set +a
+elif [ -f "$SCRIPT_DIR/.env" ]; then
   set -a
   source "$SCRIPT_DIR/.env"
   set +a
