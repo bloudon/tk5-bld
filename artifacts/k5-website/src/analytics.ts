@@ -7,7 +7,7 @@ declare global {
 
 const CONSENT_KEY = "teamk5_analytics_consent";
 const gtmId = import.meta.env.VITE_GTM_ID?.trim();
-const ga4Id = import.meta.env.VITE_GA4_ID?.trim();
+const ga4Id = import.meta.env.VITE_GA4_ID?.trim() || "G-27WK2KCNDX";
 
 export type Attribution = {
   landingPage: string;
