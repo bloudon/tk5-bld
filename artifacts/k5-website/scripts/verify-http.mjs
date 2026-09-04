@@ -88,14 +88,34 @@ try {
     assert.equal(response.location, `https://bldpermit.com${redirectPath}`);
   }
 
-  const about = await request(httpsPort, "bldpermit.com", "/about");
-  assert.equal(about.status, 200);
-  assert.match(about.body, /<title>About Team K5 Construction &amp; Development Coordination<\/title>/);
-  assert.match(about.body, /rel="canonical" href="https:\/\/bldpermit\.com\/about"/);
+  const prerenderedRoutes = [
+    "/about",
+    "/services",
+    "/pricing",
+    "/blog",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/blog/admin",
+    "/blog/florida-permit-submittal-checklist",
+    "/blog/responding-to-florida-permit-review-comments",
+    "/blog/florida-notice-of-commencement-permitting",
+  ];
+  for (const route of prerenderedRoutes) {
+    const response = await request(httpsPort, "bldpermit.com", route);
+    assert.equal(response.status, 200, `${route} should return its prerendered document`);
+    assert.ok(
+      response.body.includes(`rel="canonical" href="https://bldpermit.com${route}"`),
+      `${route} should contain its canonical URL`,
+    );
 
-  const trailingSlash = await request(httpsPort, "bldpermit.com", "/about/?x=1");
-  assert.equal(trailingSlash.status, 301);
-  assert.equal(trailingSlash.location, "https://bldpermit.com/about?x=1");
+    const trailingSlash = await request(httpsPort, "bldpermit.com", `${route}/?x=1`);
+    assert.equal(trailingSlash.status, 301, `${route}/ should normalize`);
+    assert.equal(trailingSlash.location, `https://bldpermit.com${route}?x=1`);
+  }
+
+  const admin = await request(httpsPort, "bldpermit.com", "/blog/admin");
+  assert.match(admin.body, /<meta name="robots" content="noindex, follow"/);
 
   const missing = await request(httpsPort, "bldpermit.com", "/definitely-not-a-page");
   assert.equal(missing.status, 404);

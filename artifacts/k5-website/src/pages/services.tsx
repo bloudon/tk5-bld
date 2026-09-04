@@ -10,7 +10,7 @@ const fadeIn = {
 
 export default function Services() {
   return (
-    <div className="flex flex-col min-h-screen pt-20">
+    <div className="flex flex-col min-h-screen">
       <section className="py-20 bg-zinc-950 text-white relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2831&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
         <div className="container mx-auto px-4 relative z-10">
@@ -183,12 +183,12 @@ export default function Services() {
               </div>
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">Traditional Notary</h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Many construction and real estate documents require notarization before they can be recorded or submitted. Our in-office notary services cover everything from Notices of Commencement to lien releases and affidavits — with the same fast turnaround you expect from Team K5.
+                Many construction and real estate documents require notarization before they can be recorded or submitted. Our notary coordination covers everything from Notices of Commencement to lien releases and affidavits — with the same fast turnaround you expect from Team K5.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-3">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <span className="text-foreground"><strong>In-Person Signing:</strong> Visit any of our three Florida offices in Clermont, Brandon, or Lake Worth to have documents notarized on the spot.</span>
+                  <span className="text-foreground"><strong>Signing coordination:</strong> Contact us to confirm current in-person notary availability for the Clermont, Brandon, or Lake Worth service areas.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />

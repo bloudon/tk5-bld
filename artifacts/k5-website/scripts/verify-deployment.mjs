@@ -22,10 +22,23 @@ assert.doesNotMatch(nginx, /teamk5\.com/);
 assert.match(nginx, /error_page 404 \/404\.html;/);
 assert.match(nginx, /location \/api\//);
 assert.doesNotMatch(artifact, /from = "\/\*"/);
-for (const route of ["about", "services", "pricing", "blog", "contact"]) {
+for (const route of [
+  "about",
+  "services",
+  "pricing",
+  "blog",
+  "contact",
+  "privacy",
+  "terms",
+  "blog/admin",
+  "blog/florida-permit-submittal-checklist",
+  "blog/responding-to-florida-permit-review-comments",
+  "blog/florida-notice-of-commencement-permitting",
+]) {
   assert.ok(
     artifact.includes(`from = "/${route}"\nto = "/${route}/index.html"`),
     `Missing production rewrite for /${route}`,
   );
 }
+assert.match(nginx, /\|privacy\|terms\|blog\/\(\?:admin\|florida-permit-submittal-checklist/);
 console.log("Deployment redirect and 404 configuration verified.");

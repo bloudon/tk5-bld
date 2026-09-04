@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api/
+Allow: /api/blog/
+Disallow: /blog/admin
+Disallow: /api/blog/auth
+Disallow: /api/contact
 
 Sitemap: https://bldpermit.com/sitemap.xml

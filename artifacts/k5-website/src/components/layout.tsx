@@ -3,6 +3,8 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import logoSrc from "../assets/logo.png";
+import { AnalyticsConsent } from "./analytics-consent";
+import { COMPANY, SERVICE_AREAS } from "@/site";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -26,7 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/" className="flex items-center group" data-testid="link-nav-logo">
                 <img
                   src={logoSrc}
-                  alt="Team K5 Permitting Services"
+                  alt={COMPANY.displayName}
                   className="h-36 w-auto object-contain drop-shadow-md transition-opacity group-hover:opacity-90"
                 />
               </Link>
@@ -106,7 +108,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Link href="/" data-testid="link-footer-logo">
                   <img
                     src={logoSrc}
-                    alt="Team K5 Permitting Services"
+                    alt={COMPANY.displayName}
                     className="h-20 w-auto object-contain opacity-95 hover:opacity-100 transition-opacity"
                   />
                 </Link>
@@ -117,26 +119,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <div className="flex gap-4">
                 <div className="flex items-center gap-2 text-sm">
                   <Phone className="h-4 w-4 text-primary" />
-                  <span>(407) 469-5599</span>
+                 <a href={COMPANY.phoneHref}>{COMPANY.phoneDisplay}</a>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="font-serif font-bold text-lg text-white mb-6">Offices</h3>
+              <h3 className="font-serif font-bold text-lg text-white mb-6">Florida Service Areas</h3>
               <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
+                {SERVICE_AREAS.map((area) => <li key={area.market} className="flex items-start gap-3">
                   <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>Clermont, FL<br/><span className="text-zinc-500 text-xs">Serving Central Florida</span></span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>Brandon, FL<br/><span className="text-zinc-500 text-xs">Serving Tampa Bay Area</span></span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                  <span>Lake Worth, FL<br/><span className="text-zinc-500 text-xs">Serving South Florida</span></span>
-                </li>
+                  <span>{area.market}, FL<br/><span className="text-zinc-500 text-xs">Service area: {area.region}</span></span>
+                </li>)}
               </ul>
             </div>
 
@@ -155,11 +149,23 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
           
           <div className="mt-16 pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-            <p>© {new Date().getFullYear()} Team K5 Construction and Development Coordination. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {COMPANY.legalName}. All rights reserved.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/privacy" className="hover:text-primary">Privacy</Link>
+              <Link href="/terms" className="hover:text-primary">Terms</Link>
+              <button
+                type="button"
+                className="hover:text-primary"
+                onClick={() => window.dispatchEvent(new Event("teamk5:show-analytics-choices"))}
+              >
+                Analytics choices
+              </button>
+            </div>
             <p>Serving the Southeast USA & Nationally</p>
           </div>
         </div>
       </footer>
+      <AnalyticsConsent />
     </div>
   );
 }

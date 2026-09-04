@@ -38,6 +38,29 @@ to = "/blog/index.html"
 from = "/contact"
 to = "/contact/index.html"
 
+[[services.production.rewrites]]
+from = "/privacy"
+to = "/privacy/index.html"
+
+[[services.production.rewrites]]
+from = "/terms"
+to = "/terms/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/admin"
+to = "/blog/admin/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/florida-permit-submittal-checklist"
+to = "/blog/florida-permit-submittal-checklist/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/responding-to-florida-permit-review-comments"
+to = "/blog/responding-to-florida-permit-review-comments/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/florida-notice-of-commencement-permitting"
+to = "/blog/florida-notice-of-commencement-permitting/index.html"
 
 [services.env]
 PORT = "18612"

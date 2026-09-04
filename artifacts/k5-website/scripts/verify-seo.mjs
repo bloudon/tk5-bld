@@ -14,31 +14,56 @@ const routes = [
     path: "/about",
     title: "About Team K5 Construction & Development Coordination",
     description:
-      "Meet the former building officials and permit experts behind Team K5's construction and development coordination services.",
+      "Learn how Team K5 Construction & Development Coordination applies municipal experience to permit expediting and project coordination.",
   },
   {
     path: "/services",
     title: "Permit Expediting and Coordination Services | Team K5 C&D",
     description:
-      "Explore permit expediting, inspection scheduling, e-recording, notary, and construction coordination services from Team K5.",
+      "Explore permit expediting, inspections, e-recording, notary, and coordination from Team K5 Construction & Development Coordination.",
   },
   {
     path: "/pricing",
     title: "Permit Service Pricing and Project Quotes | Team K5 C&D",
     description:
-      "Review transparent pricing for Team K5 permit expediting, inspection scheduling, e-recording, and coordination services.",
+      "Review pricing for permit expediting, inspections, e-recording, and coordination from Team K5 Construction & Development Coordination.",
   },
   {
     path: "/blog",
     title: "Florida Permitting Insights | Team K5 C&D",
     description:
-      "Practical building permit guidance, construction coordination insights, and field notes from Team K5 permit experts.",
+      "Florida permit guidance and construction coordination insights from Team K5 Construction & Development Coordination.",
   },
   {
     path: "/contact",
     title: "Request Permit Expediting Services | Team K5 C&D",
     description:
-      "Contact Team K5 to discuss permit expediting, inspection scheduling, and construction coordination for your project.",
+      "Contact Team K5 Construction & Development Coordination about permit expediting, inspections, and project coordination.",
+  },
+  {
+    path: "/privacy",
+    title: "Privacy Policy | Team K5 Construction & Development",
+    description: "Learn how Team K5 Construction & Development Coordination collects, uses, protects, and manages contact and website analytics information.",
+  },
+  {
+    path: "/terms",
+    title: "Website Terms | Team K5 Construction & Development",
+    description: "Review the website terms for Team K5 Construction & Development Coordination, including informational content and acceptable use.",
+  },
+  {
+    path: "/blog/florida-permit-submittal-checklist",
+    title: "Florida Building Permit Submittal Checklist | Team K5",
+    description: "Use this practical Florida permit checklist to organize scope, drawings, product approvals, forms, and jurisdiction requirements before submission.",
+  },
+  {
+    path: "/blog/responding-to-florida-permit-review-comments",
+    title: "Responding to Florida Permit Review Comments | Team K5",
+    description: "Learn how a clear response matrix, coordinated revisions, and disciplined file control can reduce repeat Florida permit review cycles.",
+  },
+  {
+    path: "/blog/florida-notice-of-commencement-permitting",
+    title: "Florida Notices of Commencement and Permits | Team K5",
+    description: "Learn how Florida Notices of Commencement can intersect with permit and inspection workflows, recording, timing, and project records.",
   },
 ];
 
@@ -52,6 +77,8 @@ for (const route of routes) {
     ),
   );
   assert.match(html, new RegExp(`<link rel="canonical" href="https://bldpermit.com${route.path === "/" ? "" : route.path}"`));
+  assert.match(html, /<meta property="og:image" content="https:\/\/bldpermit\.com\/og-image\.png"/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/bldpermit\.com\/og-image\.png"/);
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1, `${route.path} must contain exactly one H1`);
   assert.doesNotMatch(html, /<div id="root"><\/div>/);
   assert.match(html, /href="\/(?:about|services|pricing|blog|contact)?"/);
@@ -62,13 +89,35 @@ assert.match(notFound, /<meta name="robots" content="noindex, follow"/);
 assert.match(notFound, /404 Page Not Found/);
 
 const sitemap = await readFile(path.join(root, "dist/public/sitemap.xml"), "utf8");
-assert.equal((sitemap.match(/<url>/g) ?? []).length, routes.length - 1);
+assert.match(sitemap, /<sitemapindex/);
+assert.match(sitemap, /https:\/\/bldpermit\.com\/sitemap-static\.xml/);
+assert.match(sitemap, /https:\/\/bldpermit\.com\/api\/blog\/sitemap\.xml/);
 assert.doesNotMatch(sitemap, /404|admin|expeditepermit|teamk5/);
-assert.doesNotMatch(sitemap, /\/blog</);
+const staticSitemap = await readFile(path.join(root, "dist/public/sitemap-static.xml"), "utf8");
+assert.equal((staticSitemap.match(/<url>/g) ?? []).length, routes.length);
+assert.match(staticSitemap, /\/blog\/florida-permit-submittal-checklist/);
 
 const blog = await readFile(path.join(root, "dist/public/blog/index.html"), "utf8");
-assert.match(blog, /<meta name="robots" content="noindex, follow"/);
+assert.match(blog, /<meta name="robots" content="index, follow"/);
+assert.equal((blog.match(/<article/g) ?? []).length, 3);
+
+const home = await readFile(path.join(root, "dist/public/index.html"), "utf8");
+assert.match(home, /"@type":"Organization"/);
+assert.match(home, /Team K5 Construction and Development Coordination, LLC/);
+assert.match(home, /permitting@expeditepermit\.com/);
+for (const slug of [
+  "florida-permit-submittal-checklist",
+  "responding-to-florida-permit-review-comments",
+  "florida-notice-of-commencement-permitting",
+]) {
+  const article = await readFile(path.join(root, `dist/public/blog/${slug}/index.html`), "utf8");
+  assert.match(article, /"@type":"Article"/);
+  assert.match(article, /property="article:published_time"/);
+  assert.match(article, /name="author" content="Team K5 Construction &amp; Development Coordination"/);
+}
+const admin = await readFile(path.join(root, "dist/public/blog/admin/index.html"), "utf8");
+assert.match(admin, /<meta name="robots" content="noindex, follow"/);
 
 const robots = await readFile(path.join(root, "dist/public/robots.txt"), "utf8");
 assert.match(robots, /Sitemap: https:\/\/bldpermit\.com\/sitemap\.xml/);
-console.log(`SEO verification passed for ${routes.length} public routes.`);
+console.log(`SEO verification passed for ${routes.length} indexable public routes.`);

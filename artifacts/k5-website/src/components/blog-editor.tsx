@@ -24,7 +24,7 @@ export function BlogEditor({ password, onClose, onPublished }: BlogEditorProps) 
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [category, setCategory] = useState("Industry Insights");
-  const [author, setAuthor] = useState("Brian Kirby");
+  const [author, setAuthor] = useState("Team K5 Construction & Development Coordination");
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();

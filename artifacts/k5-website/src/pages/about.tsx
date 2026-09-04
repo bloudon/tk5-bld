@@ -10,14 +10,14 @@ const fadeIn = {
 
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen pt-20">
+    <div className="flex flex-col min-h-screen">
       <section className="py-20 bg-zinc-950 text-white relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541888081622-1bb5924ddc79?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">Our Story</h1>
             <p className="text-xl text-zinc-400 font-light leading-relaxed">
-              Founded by a former building official, Team K5 operates on a simple premise: to navigate the bureaucracy, you need to understand it from the inside out.
+              Team K5 Construction &amp; Development Coordination operates on a simple premise: to navigate the bureaucracy, you need to understand it from the inside out.
             </p>
           </motion.div>
         </div>
@@ -33,23 +33,23 @@ export default function About() {
               transition={{ duration: 0.6 }}
               className="prose prose-lg prose-zinc dark:prose-invert max-w-none"
             >
-              <h2 className="font-serif text-3xl font-bold text-foreground">The Foundation: Don Kirby</h2>
+              <h2 className="font-serif text-3xl font-bold text-foreground">Built on Municipal Experience</h2>
               <p>
-                In 2003, Don Kirby decided to change sides. After a long and successful career serving as a building official and inspector for multiple municipalities across the state of Florida, he had seen it all. He had seen contractors lose thousands of dollars on delayed projects, not because their work was poor, but because their paperwork was flawed.
+                Team K5 was founded in 2003 by a former building official and inspector with experience in Florida municipalities. That perspective showed how often projects can be delayed not because of the work itself, but because paperwork is incomplete or inconsistent.
               </p>
               <p>
-                He watched companies struggle to communicate with municipal departments, missing minor details that would send their permit applications straight to the bottom of the pile. Don knew the system intimately — he knew what reviewers looked for, what triggered red flags, and how the internal timelines functioned.
+                That municipal experience shaped a process focused on what reviewers look for, what triggers administrative issues, and how review timelines function.
               </p>
               <p>
-                He founded Team K5 Construction and Development Coordination to bridge the massive gap between the construction industry and municipal government. The firm quickly became the secret weapon for developers and contractors who wanted their projects to move without friction.
+                Team K5 Construction and Development Coordination, LLC was created to bridge the gap between the construction industry and municipal government.
               </p>
               
-              <h2 className="font-serif text-3xl font-bold text-foreground mt-12">The Next Generation: Brian Kirby</h2>
+              <h2 className="font-serif text-3xl font-bold text-foreground mt-12">Construction Coordination Today</h2>
               <p>
-                Today, Team K5 is run by Don's son, Brian Kirby. Growing up in the business, Brian absorbed the insider knowledge and technical expertise required to navigate increasingly complex modern building codes and digital submittal systems.
+                Today, the company applies its permitting knowledge to increasingly complex building codes and digital submittal systems.
               </p>
               <p>
-                Under Brian's leadership, Team K5 has expanded to three offices across Florida, serving clients throughout the Southeast United States and nationally. While the technology has changed — moving from paper plans to complex e-recording and digital portals — the core philosophy remains identical: we think like the building department so our clients don't have to.
+                Team K5 Construction &amp; Development Coordination serves clients throughout the Southeast United States and nationally. While the technology has changed — moving from paper plans to complex e-recording and digital portals — the core philosophy remains identical: we think like the building department so our clients don't have to.
               </p>
             </motion.div>
 
@@ -61,7 +61,7 @@ export default function About() {
               className="space-y-8 sticky top-32"
             >
               <div className="bg-zinc-50 border border-zinc-200 p-8">
-                <h3 className="font-serif text-2xl font-bold mb-6 text-zinc-900">Our Florida Offices</h3>
+                <h3 className="font-serif text-2xl font-bold mb-6 text-zinc-900">Florida Service Areas</h3>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="bg-primary/10 p-3 shrink-0 h-fit">
@@ -69,12 +69,7 @@ export default function About() {
                     </div>
                     <div>
                       <h4 className="font-bold text-zinc-900 text-lg">Clermont</h4>
-                      <p className="text-zinc-600 text-sm mt-1">Serving Central Florida and National Coordination.</p>
-                      <p className="text-zinc-800 text-sm font-semibold mt-2">Jon Thomas, Office Manager</p>
-                      <div className="flex flex-col gap-1 mt-1">
-                        <a href="tel:4073786682" className="text-primary text-sm hover:underline">(407) 378-6682</a>
-                        <a href="mailto:jon.thomas@expeditepermit.com" className="text-primary text-sm hover:underline">jon.thomas@expeditepermit.com</a>
-                      </div>
+                       <p className="text-zinc-600 text-sm mt-1">Service area for Central Florida and national coordination.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -83,12 +78,7 @@ export default function About() {
                     </div>
                     <div>
                       <h4 className="font-bold text-zinc-900 text-lg">Brandon</h4>
-                      <p className="text-zinc-600 text-sm mt-1">Serving the greater Tampa Bay area and Gulf Coast.</p>
-                      <p className="text-zinc-800 text-sm font-semibold mt-2">John Christianson, Office Manager</p>
-                      <div className="flex flex-col gap-1 mt-1">
-                        <a href="tel:8135356060" className="text-primary text-sm hover:underline">(813) 535-6060</a>
-                        <a href="mailto:john.christianson@expeditepermit.com" className="text-primary text-sm hover:underline">john.christianson@expeditepermit.com</a>
-                      </div>
+                       <p className="text-zinc-600 text-sm mt-1">Service area for greater Tampa Bay and the Gulf Coast.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -97,12 +87,7 @@ export default function About() {
                     </div>
                     <div>
                       <h4 className="font-bold text-zinc-900 text-lg">Lake Worth</h4>
-                      <p className="text-zinc-600 text-sm mt-1">Serving South Florida and the Atlantic Coast.</p>
-                      <p className="text-zinc-800 text-sm font-semibold mt-2">Wendy Breakwell, Office Manager</p>
-                      <div className="flex flex-col gap-1 mt-1">
-                        <a href="tel:9543807999" className="text-primary text-sm hover:underline">(954) 380-7999</a>
-                        <a href="mailto:wendy.breakwell@expeditepermit.com" className="text-primary text-sm hover:underline">wendy.breakwell@expeditepermit.com</a>
-                      </div>
+                       <p className="text-zinc-600 text-sm mt-1">Service area for South Florida and the Atlantic Coast.</p>
                     </div>
                   </div>
                 </div>

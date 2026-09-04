@@ -26,7 +26,7 @@ const permitIncludes = [
 
 export default function Pricing() {
   return (
-    <div className="flex flex-col min-h-screen pt-20">
+    <div className="flex flex-col min-h-screen">
       <section className="py-20 bg-zinc-950 text-white relative">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541888081622-1bb5924ddc79?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-luminosity"></div>
         <div className="container mx-auto px-4 relative z-10 text-center">

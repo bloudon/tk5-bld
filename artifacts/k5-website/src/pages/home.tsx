@@ -43,7 +43,7 @@ export default function Home() {
             </motion.h1>
             
             <motion.p variants={fadeIn} className="text-lg md:text-2xl text-zinc-300 mb-10 max-w-2xl leading-relaxed font-light">
-              Founded by a former building official, Team K5 provides expert permit expediting and coordination. Stop fighting red tape and let the insiders handle your paperwork.
+              Team K5 Construction &amp; Development Coordination provides expert permit expediting and coordination. Stop fighting red tape and let the insiders handle your paperwork.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -71,7 +71,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-3">
                 <Building2 className="h-5 w-5 text-primary" />
-                <span>3 Florida Offices</span>
+                <span>3 Florida Service Areas</span>
               </div>
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-5 w-5 text-primary" />
@@ -159,10 +159,10 @@ export default function Home() {
               <h2 className="text-3xl md:text-5xl font-serif font-bold text-zinc-900 mb-6">The Insider Advantage</h2>
               <div className="space-y-6 text-lg text-zinc-600">
                 <p>
-                  In 2003, Don Kirby left his career as a building official and inspector for multiple Florida municipalities. He saw contractors constantly struggling with the permitting process — simply because they didn't speak the building department's language.
+                  Team K5 was founded in 2003 by a former building official and inspector with Florida municipal experience who saw contractors struggle because they did not speak the building department's language.
                 </p>
                 <p>
-                  He founded Team K5 to bridge that gap. Today, run by his son Brian Kirby, we still operate on that foundational principle: <strong>to get paper moved, you need to think like the person reviewing it.</strong>
+                  Team K5 was created to bridge that gap and still operates on the same principle: <strong>to get paper moved, you need to think like the person reviewing it.</strong>
                 </p>
                 <ul className="space-y-4 pt-4">
                   <li className="flex items-start gap-3">
