@@ -14,3 +14,17 @@ mtime_ms = 1788530825886
 storage_uri = "gcs://replit-rams-assets-janeway/rams/assets/repl:d5555e39-c6b4-42b5-91bf-11362a71245e/dad512b0-2c2e-44e9-8104-8c0ee508b099/da2ea6ca-e8f1-4164-aaaf-e706b72e5053"
 storage_version_token = "1788530832500868"
 content_type = "image/jpeg"
+
+[[outputs]]
+id = "7rRxdQwA3Waf-69DCdQDv"
+uri = "file://artifacts/k5-website/public/favicon-512.png"
+type = "image"
+title = "Team K5 favicon"
+description = "Cropped K5 mark prepared on a square dark background for browser tabs and bookmarks."
+logical_id = "6a7a4571-e865-4056-a320-8fb0f54de780"
+content_hash = "sha256:a91446bf198422c154e19a892fe75020535acb1f17df048d178e7f0cc6b81b57"
+size = 155643
+mtime_ms = 1788566083384
+storage_uri = "gcs://replit-rams-assets-janeway/rams/assets/repl:d5555e39-c6b4-42b5-91bf-11362a71245e/6a7a4571-e865-4056-a320-8fb0f54de780/a123bf28-0fc6-41ee-94ab-409304b4c989"
+storage_version_token = "1788566111550463"
+content_type = "image/png"
