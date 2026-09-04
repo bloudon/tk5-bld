@@ -109,17 +109,20 @@ export default function Home() {
               {
                 icon: <FileText className="h-10 w-10 text-primary" />,
                 title: "Permit Expediting",
-                description: "We handle the entire submittal process. By catching errors before they hit the reviewer's desk, we shave weeks off your timeline."
+                description: "We handle the entire submittal process. By catching errors before they hit the reviewer's desk, we shave weeks off your timeline.",
+                href: "/services/permit-expediting",
               },
               {
                 icon: <ClipboardCheck className="h-10 w-10 text-primary" />,
                 title: "Inspection Scheduling",
-                description: "Strategic coordination of your inspections to prevent dead days on site. We know how the schedules work and how to keep inspectors happy."
+                description: "Strategic coordination of your inspections to prevent dead days on site. We know how the schedules work and how to keep inspectors happy.",
+                href: "/services/inspection-scheduling",
               },
               {
                 icon: <Building2 className="h-10 w-10 text-primary" />,
                 title: "E-Recording",
-                description: "Fast, compliant electronic document recording. NOCs, NOC terminations, and critical project documents handled digitally for speed."
+                description: "Fast, compliant electronic document recording. NOCs, NOC terminations, and critical project documents handled digitally for speed.",
+                href: "/services/e-recording-notice-of-commencement",
               }
             ].map((service, i) => (
               <motion.div 
@@ -137,7 +140,7 @@ export default function Home() {
                 <div className="mb-6">{service.icon}</div>
                 <h3 className="text-xl font-bold font-serif mb-4 text-card-foreground">{service.title}</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">{service.description}</p>
-                <Link href="/services" className="text-primary font-semibold flex items-center text-sm group-hover:underline">
+                <Link href={service.href} className="text-primary font-semibold flex items-center text-sm group-hover:underline">
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Link>
               </motion.div>

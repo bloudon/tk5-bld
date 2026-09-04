@@ -100,6 +100,16 @@ try {
     "/blog/florida-permit-submittal-checklist",
     "/blog/responding-to-florida-permit-review-comments",
     "/blog/florida-notice-of-commencement-permitting",
+    "/services/permit-expediting",
+    "/services/commercial-permit-expediting",
+    "/services/residential-permit-expediting",
+    "/services/inspection-scheduling",
+    "/services/e-recording-notice-of-commencement",
+    "/services/multi-site-permit-coordination",
+    "/markets/florida-permit-expediting",
+    "/markets/orlando-permit-expediting",
+    "/markets/tampa-permit-expediting",
+    "/markets/palm-beach-permit-expediting",
   ];
   for (const route of prerenderedRoutes) {
     const response = await request(httpsPort, "bldpermit.com", route);

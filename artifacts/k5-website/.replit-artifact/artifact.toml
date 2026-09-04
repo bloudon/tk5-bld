@@ -62,6 +62,46 @@ to = "/blog/responding-to-florida-permit-review-comments/index.html"
 from = "/blog/florida-notice-of-commencement-permitting"
 to = "/blog/florida-notice-of-commencement-permitting/index.html"
 
+[[services.production.rewrites]]
+from = "/services/permit-expediting"
+to = "/services/permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/services/commercial-permit-expediting"
+to = "/services/commercial-permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/services/residential-permit-expediting"
+to = "/services/residential-permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/services/inspection-scheduling"
+to = "/services/inspection-scheduling/index.html"
+
+[[services.production.rewrites]]
+from = "/services/e-recording-notice-of-commencement"
+to = "/services/e-recording-notice-of-commencement/index.html"
+
+[[services.production.rewrites]]
+from = "/services/multi-site-permit-coordination"
+to = "/services/multi-site-permit-coordination/index.html"
+
+[[services.production.rewrites]]
+from = "/markets/florida-permit-expediting"
+to = "/markets/florida-permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/markets/orlando-permit-expediting"
+to = "/markets/orlando-permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/markets/tampa-permit-expediting"
+to = "/markets/tampa-permit-expediting/index.html"
+
+[[services.production.rewrites]]
+from = "/markets/palm-beach-permit-expediting"
+to = "/markets/palm-beach-permit-expediting/index.html"
+
 [services.env]
 PORT = "18612"
 BASE_PATH = "/"

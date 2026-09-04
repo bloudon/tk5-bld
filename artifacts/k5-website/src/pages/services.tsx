@@ -25,6 +25,16 @@ export default function Services() {
 
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+          <nav aria-label="Detailed permit services" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ["Permit Expediting", "/services/permit-expediting"],
+              ["Commercial Expediting", "/services/commercial-permit-expediting"],
+              ["Residential Expediting", "/services/residential-permit-expediting"],
+              ["Inspection Scheduling", "/services/inspection-scheduling"],
+              ["E-Recording & NOC", "/services/e-recording-notice-of-commencement"],
+              ["Multi-Site Coordination", "/services/multi-site-permit-coordination"],
+            ].map(([label, href]) => <Link key={href} href={href} className="border border-border p-5 font-bold text-primary hover:border-primary">{label}<ArrowRight className="ml-2 inline h-4 w-4"/></Link>)}
+          </nav>
           
           {/* Service 1 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

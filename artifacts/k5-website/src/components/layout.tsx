@@ -46,16 +46,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   {item.name}
                 </Link>
               ))}
-              <a href="https://pflow.permitsmanager.com/" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="sm" className="font-semibold" data-testid="button-login">
+              <Button asChild variant="outline" size="sm" className="font-semibold">
+                <a href="https://pflow.permitsmanager.com/" target="_blank" rel="noopener noreferrer" data-testid="button-login">
                   Login
-                </Button>
-              </a>
-              <Link href="/contact" className="ml-2">
-                <Button variant="default" size="sm" className="font-semibold shadow-sm">
+                </a>
+              </Button>
+              <Button asChild variant="default" size="sm" className="ml-2 font-semibold shadow-sm">
+                <Link href="/contact">
                   Get a Quote
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </nav>
 
             <div className="md:hidden flex items-center">
@@ -90,9 +90,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <div className="pt-4">
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="w-full justify-center">Get a Quote</Button>
-              </Link>
+              <Button asChild className="w-full justify-center">
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Get a Quote</Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -144,6 +144,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     </Link>
                   </li>
                 ))}
+              </ul>
+              <h3 className="mt-8 font-serif font-bold text-lg text-white mb-4">Permit Markets</h3>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/markets/florida-permit-expediting" className="hover:text-primary">Florida</Link></li>
+                <li><Link href="/markets/orlando-permit-expediting" className="hover:text-primary">Orlando</Link></li>
+                <li><Link href="/markets/tampa-permit-expediting" className="hover:text-primary">Tampa</Link></li>
+                <li><Link href="/markets/palm-beach-permit-expediting" className="hover:text-primary">Palm Beach County</Link></li>
               </ul>
             </div>
           </div>

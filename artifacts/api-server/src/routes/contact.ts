@@ -39,10 +39,12 @@ function getTransport() {
 }
 
 const SERVICE_LABELS: Record<string, string> = {
+  "permit-general": "Permit Expediting – Not Sure Which Type",
   "permit-residential": "Permit Expediting – Residential",
   "permit-commercial": "Permit Expediting – Commercial",
   inspection: "Inspection Scheduling",
   erecording: "E-Recording",
+  "multi-site": "Multi-Site Permit Coordination",
   "notary-traditional": "Traditional Notary",
   "notary-ron": "Remote Online Notary (RON)",
   other: "Other / Not Sure",

@@ -1,3 +1,5 @@
+import { landingPages } from "./landing-pages";
+
 export const SITE_URL = "https://bldpermit.com";
 export const SOCIAL_IMAGE = `${SITE_URL}/og-image.png`;
 
@@ -18,6 +20,11 @@ export const publicRoutes: SeoDefinition[] = [
     description:
       "Team K5 Construction & Development Coordination manages permit expediting, inspections, e-recording, and nationwide project coordination. Serving contractors since 2003.",
   },
+  ...landingPages.map(page => ({
+    path: page.path,
+    title: `${page.title} | Team K5`,
+    description: page.intro,
+  })),
   {
     path: "/about",
     title: "About Team K5 Construction & Development Coordination",

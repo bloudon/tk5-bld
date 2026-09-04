@@ -14,6 +14,8 @@ import BlogArticle from "@/pages/blog-article";
 import BlogAdmin from "@/pages/blog-admin";
 import { Privacy, Terms } from "@/pages/legal";
 import { Layout } from "@/components/layout";
+import { landingPages } from "@/landing-pages";
+import LandingPage from "@/pages/landing-page";
 import { canonicalUrl, getSeo, SOCIAL_IMAGE } from "@/seo";
 import { loadAnalytics, track, trackCurrentPage } from "@/analytics";
 
@@ -77,6 +79,11 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
+      {landingPages.map(page => (
+        <Route key={page.path} path={page.path}>
+          {() => <LandingPage page={page} />}
+        </Route>
+      ))}
       <Route path="/pricing" component={Pricing} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/admin" component={BlogAdmin} />

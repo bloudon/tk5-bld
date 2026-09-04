@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,19 @@ export default function Contact() {
     message: "",
   });
   const started = useRef(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get("service");
+    const market = params.get("market");
+    const validServices = new Set(["permit-general", "permit-residential", "permit-commercial", "inspection", "erecording", "multi-site", "notary-traditional", "notary-ron", "other"]);
+    const validMarkets = new Set(["clermont-central-florida", "brandon-tampa-bay", "lake-worth-south-florida", "other-national"]);
+    setForm(prev => ({
+      ...prev,
+      service: service && validServices.has(service) ? service : prev.service,
+      market: market && validMarkets.has(market) ? market : prev.market,
+    }));
+  }, []);
 
   const set = (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
@@ -154,10 +167,12 @@ export default function Contact() {
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="permit-general">Permit Expediting – Not Sure Which Type</SelectItem>
                       <SelectItem value="permit-residential">Permit Expediting – Residential</SelectItem>
                       <SelectItem value="permit-commercial">Permit Expediting – Commercial</SelectItem>
                       <SelectItem value="inspection">Inspection Scheduling</SelectItem>
                       <SelectItem value="erecording">E-Recording</SelectItem>
+                      <SelectItem value="multi-site">Multi-Site Permit Coordination</SelectItem>
                       <SelectItem value="notary-traditional">Traditional Notary</SelectItem>
                       <SelectItem value="notary-ron">Remote Online Notary (RON)</SelectItem>
                       <SelectItem value="other">Other / Not Sure</SelectItem>

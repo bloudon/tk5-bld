@@ -1,0 +1,1 @@
+- [Wouter Switch route children](wouter-switch-route-children.md) — keep generated Route elements as direct Switch children; wrapper components can behave like a default route during SSR.

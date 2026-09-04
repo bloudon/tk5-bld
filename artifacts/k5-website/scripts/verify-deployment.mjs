@@ -34,11 +34,22 @@ for (const route of [
   "blog/florida-permit-submittal-checklist",
   "blog/responding-to-florida-permit-review-comments",
   "blog/florida-notice-of-commencement-permitting",
+  "services/permit-expediting",
+  "services/commercial-permit-expediting",
+  "services/residential-permit-expediting",
+  "services/inspection-scheduling",
+  "services/e-recording-notice-of-commencement",
+  "services/multi-site-permit-coordination",
+  "markets/florida-permit-expediting",
+  "markets/orlando-permit-expediting",
+  "markets/tampa-permit-expediting",
+  "markets/palm-beach-permit-expediting",
 ]) {
   assert.ok(
     artifact.includes(`from = "/${route}"\nto = "/${route}/index.html"`),
     `Missing production rewrite for /${route}`,
   );
 }
-assert.match(nginx, /\|privacy\|terms\|blog\/\(\?:admin\|florida-permit-submittal-checklist/);
+assert.match(nginx, /services\(\?:\/\(\?:permit-expediting/);
+assert.match(nginx, /markets\/\(\?:florida-permit-expediting/);
 console.log("Deployment redirect and 404 configuration verified.");
