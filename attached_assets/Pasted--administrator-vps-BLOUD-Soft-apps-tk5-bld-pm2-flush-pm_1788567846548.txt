@@ -1,0 +1,69 @@
+
+administrator@vps-BLOUD-Soft:~/apps/tk5-bld$ pm2 flush
+pm2 logs k5-api
+[PM2] Flushing /home/administrator/.pm2/pm2.log
+[PM2] Flushing:
+[PM2] /home/administrator/.pm2/logs/permitflow-out.log
+[PM2] /home/administrator/.pm2/logs/permitflow-error.log
+[PM2] Flushing:
+[PM2] /home/administrator/.pm2/logs/docu-submit-out.log
+[PM2] /home/administrator/.pm2/logs/docu-submit-error.log
+[PM2] Flushing:
+[PM2] /home/administrator/.pm2/logs/tk5-api-out.log
+[PM2] /home/administrator/.pm2/logs/tk5-api-error.log
+node:fs:573
+  return binding.open(
+                 ^
+
+Error: EACCES: permission denied, open '/home/administrator/.pm2/logs/tk5-api-out.log'
+    at Object.openSync (node:fs:573:18)
+    at /usr/lib/node_modules/pm2/lib/API/LogManagement.js:41:27
+    at Array.forEach (<anonymous>)
+    at /usr/lib/node_modules/pm2/lib/API/LogManagement.js:31:12
+    at /usr/lib/node_modules/pm2/node_modules/pm2-axon-rpc/lib/client.js:45:10
+    at Parser.<anonymous> (/usr/lib/node_modules/pm2/node_modules/pm2-axon/lib/sockets/req.js:67:8)
+    at Parser.emit (node:events:524:28)
+    at Parser._write (/usr/lib/node_modules/pm2/node_modules/amp/lib/stream.js:91:16)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10) {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'open',
+  path: '/home/administrator/.pm2/logs/tk5-api-out.log'
+}
+
+Node.js v20.20.2
+[TAILING] Tailing last 15 lines for [k5-api] process (change the value with --lines option)
+/home/administrator/apps/tk5-bld/logs/k5-api-out.log last 15 lines:
+14|k5-api  | "pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":23,"method":"GET","url":"/login"},"res":{"statusCode":404},"responseTime":3,"msg":"request completed"}
+14|k5-api  | 2026-07-26 17:56:17: {"level":30,"time":1785088577953,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":24,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 17:57:27: {"level":30,"time":1785088647936,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":25,"method":"GET","url":"/robots.txt"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+14|k5-api  | 2026-07-26 17:57:28: {"level":30,"time":1785088648105,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":26,"method":"GET","url":"/sitemap.xml"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:02:07: {"level":30,"time":1785088927070,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":27,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:02:08: {"level":30,"time":1785088928169,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":28,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:09:59: {"level":30,"time":1785089399766,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":29,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:10:02: {"level":30,"time":1785089402116,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":30,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:10:04: {"level":30,"time":1785089404038,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":31,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:10:42: {"level":30,"time":1785089442084,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":32,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:10:45: {"level":30,"time":1785089445374,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":33,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":3,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:15:25: {"level":30,"time":1785089725356,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":34,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:19:07: {"level":30,"time":1785089947271,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":35,"method":"GET","url":"/"},"res":{"statusCode":404},"responseTime":2,"msg":"request completed"}
+14|k5-api  | 2026-07-26 18:19:15: {"level":30,"time":1785089955168,"pid":3582733,"hostname":"vps-BLOUD-Soft","req":{"id":36,"method":"GET","url":"/favicon.ico"},"res":{"statusCode":404},"responseTime":1,"msg":"request completed"}
+14|k5-api  | 2026-07-29 14:11:46: {"level":30,"time":1785334306870,"pid":146835,"hostname":"vps-BLOUD-Soft","port":3001,"msg":"Server listening"}
+
+/home/administrator/apps/tk5-bld/logs/k5-api-error.log last 15 lines:
+14|k5-api  | 2026-09-04 23:27:33:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:27:33:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:27:33:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 23:46:30: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 23:46:30:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:46:30:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:46:30:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 23:57:11: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 23:57:11:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:57:11:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:57:11:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-05 00:10:54: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-05 00:10:54:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-05 00:10:54:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-05 00:10:54:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
