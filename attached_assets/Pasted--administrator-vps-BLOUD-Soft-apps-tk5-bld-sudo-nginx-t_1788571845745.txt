@@ -1,0 +1,54 @@
+
+
+administrator@vps-BLOUD-Soft:~/apps/tk5-bld$ sudo nginx -t
+sudo systemctl reload nginx
+curl -i https://bldpermit.com/api/blog
+[sudo] password for administrator:
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/app.fnbcostpro.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/www.erecording-fl.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/www.erecording-fl.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/fhd.com.crt"
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/fhd.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/fnbcostpro.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/kayeflooring.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/app.permitsmanager.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/pflow.permitsmanager.com/fullchain.pem"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/bldpermit.com/fullchain.pem"
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+HTTP/2 502
+server: nginx
+date: Sat, 05 Sep 2026 01:27:54 GMT
+content-type: text/html
+content-length: 150
+
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+administrator@vps-BLOUD-Soft:~/apps/tk5-bld$ sudo grep -RniE \
+  'server_name.*bldpermit\.com|location /api|location = /api|proxy_pass' \
+  /etc/nginx/sites-enabled \
+  /etc/nginx/conf.d
+/etc/nginx/sites-enabled/kayeflooring.com.conf:7:location /api {
+/etc/nginx/sites-enabled/kayeflooring.com.conf:8:    proxy_pass http://localhost:8080;
+/etc/nginx/sites-enabled/permitflow.conf:7:        proxy_pass http://127.0.0.1:3000;
+/etc/nginx/sites-enabled/tk5-bld.conf:5:    server_name bldpermit.com www.bldpermit.com expeditepermit.com www.expeditepermit.com;
+/etc/nginx/sites-enabled/tk5-bld.conf:10:    location /api/ {
+/etc/nginx/sites-enabled/tk5-bld.conf:11:        proxy_pass http://127.0.0.1:3003;
+/etc/nginx/sites-enabled/tk5-bld.conf:57:    server_name bldpermit.com www.bldpermit.com expeditepermit.com www.expeditepermit.com;
+/etc/nginx/sites-enabled/fhd.com.conf:46:    proxy_pass http://127.0.0.1:8090/;
+/etc/nginx/sites-enabled/fhd.com.conf:56:    proxy_pass_request_headers on;
+/etc/nginx/sites-enabled/app.fnbcostpro.com.conf.before-static-web:15:        proxy_pass http://localhost:3004;
+/etc/nginx/sites-enabled/app.fnbcostpro.com.conf:18:    proxy_pass http://127.0.0.1:3004;
+/etc/nginx/sites-enabled/app.fnbcostpro.com.conf:28:    location /api/ {
+/etc/nginx/sites-enabled/app.fnbcostpro.com.conf:29:        proxy_pass http://127.0.0.1:3004;
+/etc/nginx/sites-enabled/app.fnbcostpro.com.conf:37:        proxy_pass http://127.0.0.1:3004;
+/etc/nginx/sites-enabled/erecording-fl.conf:24:    proxy_pass http://127.0.0.1:3002;
+/etc/nginx/sites-enabled/fnbcostpro.com.conf:21:    location /api/ {
+/etc/nginx/sites-enabled/fnbcostpro.com.conf:22:        proxy_pass http://127.0.0.1:3004;
+/etc/nginx/sites-enabled/fnbcostpro.com.conf:31:        proxy_pass http://127.0.0.1:3004;
+/etc/nginx/sites-enabled/fnbcostpro.com.conf.backup:5:        proxy_pass http://localhost:3004;
