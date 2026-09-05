@@ -1,0 +1,80 @@
+PORT=3001 pm2 restart ecosystem.config.cjs \
+  --only k5-api \
+  --update-env
+
+pm2 save
+[PM2] Applying action restartProcessId on app [k5-api](ids: [ 14 ])
+[PM2] [k5-api](14) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 2  │ docu-submit        │ fork     │ 23   │ online    │ 0%       │ 89.2mb   │
+│ 13 │ fnbcostpro         │ fork     │ 1624 │ online    │ 0%       │ 268.1mb  │
+│ 14 │ k5-api             │ fork     │ 527  │ online    │ 0%       │ 18.8mb   │
+│ 12 │ kaye-api           │ fork     │ 21   │ online    │ 0%       │ 93.9mb   │
+│ 1  │ permitflow         │ fork     │ 30   │ online    │ 0%       │ 213.8mb  │
+│ 3  │ tk5-api            │ fork     │ 23   │ online    │ 0%       │ 108.3mb  │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /home/administrator/.pm2/dump.pm2
+administrator@vps-BLOUD-Soft:~/apps/tk5-bld$ pm2 list
+sudo pm2 list
+sudo ss -ltnp | grep -E ':3001|:3003'
+pm2 logs k5-api --lines 30
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 2  │ docu-submit        │ fork     │ 23   │ online    │ 0%       │ 88.8mb   │
+│ 13 │ fnbcostpro         │ fork     │ 1624 │ online    │ 0%       │ 267.7mb  │
+│ 14 │ k5-api             │ fork     │ 527  │ online    │ 0%       │ 65.3mb   │
+│ 12 │ kaye-api           │ fork     │ 21   │ online    │ 0%       │ 93.9mb   │
+│ 1  │ permitflow         │ fork     │ 30   │ online    │ 0%       │ 213.9mb  │
+│ 3  │ tk5-api            │ fork     │ 23   │ online    │ 0%       │ 108.3mb  │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+LISTEN 0      511                *:3003             *:*    users:(("node /home/admi",pid=3681501,fd=19))                                                                                                                                           
+LISTEN 0      511                *:3001             *:*    users:(("node /home/admi",pid=147692,fd=19))                                                                                                                                            
+[TAILING] Tailing last 30 lines for [k5-api] process (change the value with --lines option)
+/home/administrator/apps/tk5-bld/logs/k5-api-error.log last 30 lines:
+14|k5-api  | 2026-08-30 19:26:29:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-08-30 19:26:29:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-01 02:38:42: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-01 02:38:42:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-01 02:38:42:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-01 02:38:42:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 16:09:56: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 16:09:56:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 16:09:56:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 16:09:56:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 23:27:33: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 23:27:33:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:27:33:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:27:33:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 23:46:30: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 23:46:30:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:46:30:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:46:30:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-04 23:57:11: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-04 23:57:11:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-04 23:57:11:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-04 23:57:11:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-05 00:10:54: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-05 00:10:54:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-05 00:10:54:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-05 00:10:54:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+14|k5-api  | 2026-09-05 00:26:41: Error: DATABASE_URL must be set. Did you forget to provision a database?
+14|k5-api  | 2026-09-05 00:26:41:     at file:///home/administrator/apps/tk5-bld/lib/db/src/index.ts:8:9
+14|k5-api  | 2026-09-05 00:26:41:     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+14|k5-api  | 2026-09-05 00:26:41:     at ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+
+/home/administrator/apps/tk5-bld/logs/k5-api-out.log last 30 lines:
+14|k5-api  | as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:41: {"level":50,"time":1788568601039,"pid":147588,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:42: {"level":50,"time":1788568602141,"pid":147604,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:43: {"level":50,"time":1788568603271,"pid":147616,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:44: {"level":50,"time":1788568604463,"pid":147634,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:46: {"level":50,"time":1788568605523,"pid":147646,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:47: {"level":50,"time":1788568606699,"pid":147658,"hostname":"vps-BLOUD-Soft","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::3003","stack":"Error: listen EADDRINUSE: address already in use :::3003\n    at Server.setupListenHandle [as _listen2] (node:net:1908:16)\n    at listenInCluster (node:net:1965:12)\n    at Server.listen (node:net:2067:7)\n    at Function.listen (file:///home/administrator/apps/tk5-bld/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/administrator/apps/tk5-bld/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)\n    at ModuleLoader.import (node:internal/modules/esm/loader:606:24)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":3003},"msg":"Error listening on port"}
+14|k5-api  | 2026-09-05 00:36:48: {"level":30,"time":1788568608273,"pid":147692,"hostname":"vps-BLOUD-Soft","port":3001,"msg":"Server listening"}
