@@ -105,11 +105,17 @@ export const notFoundSeo: SeoDefinition = {
   description: "The requested page could not be found.",
 };
 
+function normalizePathname(pathname: string): string {
+  const path = pathname.split(/[?#]/, 1)[0] || "/";
+  return path === "/" ? path : path.replace(/\/+$/, "");
+}
+
 export function getSeo(pathname: string): SeoDefinition {
-  const exact = publicRoutes.find((route) => route.path === pathname);
+  const normalizedPath = normalizePathname(pathname);
+  const exact = publicRoutes.find((route) => route.path === normalizedPath);
   if (exact) return exact;
-  if (pathname.startsWith("/blog/")) {
-    const slug = pathname.slice("/blog/".length);
+  if (normalizedPath.startsWith("/blog/")) {
+    const slug = normalizedPath.slice("/blog/".length);
     const posts = [
       {
         slug: "florida-permit-submittal-checklist",
@@ -132,7 +138,7 @@ export function getSeo(pathname: string): SeoDefinition {
     ];
     const post = posts.find((item) => item.slug === slug);
     if (post) return {
-      path: pathname,
+      path: normalizedPath,
       title: post.title,
       description: post.description,
       type: "article",
