@@ -1,0 +1,44 @@
+
+[]administrator@vps-BLOUD-Soft:~/apps/tk5-bldpm2 status k5-apipi
+curl -i https://bldpermit.com/api/blog
+curl -I 'https://expeditepermit.com/contact/?source=test'
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 2  │ docu-submit      │ default     │ 1.0.0   │ fork    │ 895014   │ 28D    │ 24   │ online    │ 0%       │ 78.8mb   │ adm… │ disabled │
+│ 13 │ fnbcostpro       │ default     │ 1.15.0  │ fork    │ 465545   │ 6D     │ 1628 │ online    │ 0%       │ 377.0mb  │ adm… │ disabled │
+│ 14 │ k5-api           │ default     │ 0.0.0   │ fork    │ 895046   │ 28D    │ 529  │ online    │ 0%       │ 76.9mb   │ adm… │ disabled │
+│ 12 │ kaye-api         │ default     │ 0.0.0   │ fork    │ 895023   │ 28D    │ 22   │ online    │ 0%       │ 76.9mb   │ adm… │ disabled │
+│ 1  │ permitflow       │ default     │ 2.5.12  │ fork    │ 2399018  │ 19D    │ 35   │ online    │ 0%       │ 227.3mb  │ adm… │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 15 │ pm2-logrotate                │ 3.0.0         │ 899833   │ online   │ 4    │ 0%       │ 65.3mb   │ adm… │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+HTTP/2 200
+server: nginx
+date: Wed, 07 Oct 2026 21:36:57 GMT
+content-type: application/json; charset=utf-8
+content-length: 2
+x-powered-by: Express
+access-control-allow-origin: *
+etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+x-permitted-cross-domain-policies: master-only
+referrer-policy: same-origin
+
+[]HTTP/2 301
+server: nginx
+date: Wed, 07 Oct 2026 21:36:57 GMT
+content-type: text/html
+content-length: 162
+location: https://bldpermit.com/contact/?source=test
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+x-permitted-cross-domain-policies: master-only
+referrer-policy: same-origin
