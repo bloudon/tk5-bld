@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, Building2, FileText, ClipboardCheck, ShieldCh
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ClientMarquee } from "@/components/client-marquee";
+import { HeroRotator } from "@/components/hero-rotator";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -24,10 +25,8 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-zinc-950 text-white overflow-hidden min-h-[90vh] flex items-center pt-20">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541888081622-1bb5924ddc79?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-luminosity"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 pb-48 md:pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div 
             initial="hidden"
             animate="visible"
@@ -38,7 +37,7 @@ export default function Home() {
               Est. 2003 • Florida & Nationwide
             </motion.div>
             
-            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight mb-8 leading-[1.05] text-white">
+            <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl lg:text-6xl xl:text-7xl font-serif font-bold tracking-tight mb-8 leading-[1.05] text-white">
               We know the system because <span className="text-primary italic font-light">we built it.</span>
             </motion.h1>
             
@@ -59,6 +58,7 @@ export default function Home() {
               </Link>
             </motion.div>
           </motion.div>
+          <HeroRotator />
         </div>
 
         {/* Trust Bar at bottom of hero */}
