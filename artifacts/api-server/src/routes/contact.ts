@@ -1,20 +1,22 @@
 import { Router, type IRouter } from "express";
 import { z } from "zod";
 import nodemailer from "nodemailer";
+import { challengeRouter, contactLimiter, verifyContact } from "./contact-protection";
 
 const router: IRouter = Router();
+router.use(challengeRouter);
 
 const escapeHtml = (value: string) =>
   value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
 
 const ContactBody = z.object({
-  name: z.string().min(1),
-  company: z.string().optional(),
+  name: z.string().min(1).max(200),
+  company: z.string().max(200).optional(),
   email: z.string().email(),
-  phone: z.string().min(1),
-  service: z.string().min(1),
-  market: z.string().min(1),
-  message: z.string().min(1),
+  phone: z.string().min(1).max(80),
+  service: z.string().min(1).max(100),
+  market: z.string().min(1).max(100),
+  message: z.string().min(1).max(10000),
   attribution: z.object({
     landingPage: z.string().max(2048),
     referrer: z.string().max(2048).optional(),
@@ -50,7 +52,7 @@ const SERVICE_LABELS: Record<string, string> = {
   other: "Other / Not Sure",
 };
 
-router.post("/contact", async (req, res) => {
+router.post("/contact", contactLimiter, verifyContact, async (req, res) => {
   const parsed = ContactBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid form data" });

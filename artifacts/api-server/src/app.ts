@@ -5,6 +5,8 @@ import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
+// Production Nginx is local; never trust arbitrary client-supplied forwarding headers.
+app.set("trust proxy", "loopback");
 
 app.use(
   pinoHttp({

@@ -6,12 +6,13 @@ module.exports = {
       name: "k5-api",
       script: "./artifacts/api-server/dist/index.mjs",
       interpreter: "node",
-      // Runs 1 instance; change to "max" to use all CPU cores
+      // Keep one instance: ALTCHA uses an atomic, process-local challenge store.
       instances: 1,
       exec_mode: "fork",
       env: {
         NODE_ENV: "production",
         PORT: 3001,
+        HOST: "127.0.0.1",
       },
       // Restart if memory exceeds 512 MB
       max_memory_restart: "512M",

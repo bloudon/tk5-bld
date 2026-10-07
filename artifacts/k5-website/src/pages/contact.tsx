@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { getAttribution, track } from "@/analytics";
 import { COMPANY } from "@/site";
+import { SpamVerification } from "@/components/spam-verification";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -19,6 +20,9 @@ export default function Contact() {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [altcha, setAltcha] = useState("");
+  const [website, setWebsite] = useState("");
+  const [verificationKey, setVerificationKey] = useState(0);
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -48,12 +52,14 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!altcha || submitting) return;
+    setSubmitted(false);
     setSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, attribution: getAttribution() }),
+        body: JSON.stringify({ ...form, altcha, website, attribution: getAttribution() }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -69,10 +75,14 @@ export default function Contact() {
         ...getAttribution(),
       });
       setSubmitted(true);
+      setAltcha("");
+      setVerificationKey(key => key + 1);
       setForm({ name: "", company: "", email: "", phone: "", service: "", market: "", message: "" });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Something went wrong. Please call us directly.";
       toast({ title: "Couldn't send your message", description: msg, variant: "destructive" });
+      setAltcha("");
+      setVerificationKey(key => key + 1);
     } finally {
       setSubmitting(false);
     }
@@ -192,7 +202,13 @@ export default function Contact() {
                   />
                 </div>
 
-                <Button type="submit" size="lg" disabled={submitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none h-14">
+                <div className="absolute -left-[10000px]" aria-hidden="true">
+                  <label htmlFor="contact-website">Leave this field empty</label>
+                  <input id="contact-website" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} />
+                </div>
+                <SpamVerification resetKey={verificationKey} onVerified={setAltcha} />
+                <button type="button" className="text-sm underline" onClick={() => { setAltcha(""); setVerificationKey(key => key + 1); }}>Restart verification</button>
+                <Button type="submit" size="lg" disabled={submitting || !altcha} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none h-14">
                   {submitting ? "Sending…" : "Submit Request"}
                 </Button>
               </form>

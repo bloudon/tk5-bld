@@ -1,1 +1,2 @@
 - [Wouter Switch route children](wouter-switch-route-children.md) — keep generated Route elements as direct Switch children; wrapper components can behave like a default route during SSR.
+- [Self-hosted verification](self-hosted-verification.md) — prefer reusable ALTCHA integration with independent configuration per VPS app.

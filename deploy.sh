@@ -52,6 +52,13 @@ echo ""
 echo "▶ Pulling latest code..."
 git pull origin main
 
+# Check after pulling too: do not deploy a protected form without its signing key.
+ALTCHA_HMAC_SECRET="${ALTCHA_HMAC_SECRET:-}"
+if [ "${#ALTCHA_HMAC_SECRET}" -lt 32 ]; then
+  echo "✗ Set ALTCHA_HMAC_SECRET (at least 32 random characters) in .env.production before deploying."
+  exit 1
+fi
+
 # ── 2. Install / update dependencies ──────────────────────────────────────────
 echo ""
 echo "▶ Installing dependencies..."
