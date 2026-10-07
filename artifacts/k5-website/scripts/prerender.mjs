@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = path.join(root, "dist/public");
 const serverDir = path.join(root, "dist/server");
 const template = await readFile(path.join(publicDir, "index.html"), "utf8");
-const { canonicalUrl, notFoundSeo, publicRoutes, render } = await import(
+const { canonicalUrl, notFoundSeo, publicRoutes, render, getStructuredData } = await import(
   pathToFileURL(path.join(serverDir, "entry-server.js"))
 );
 
@@ -20,39 +20,7 @@ function escape(value) {
 
 function documentFor(route, pathname, robots = "index, follow") {
   const canonical = canonicalUrl(pathname);
-  const structuredData = pathname === "/" ? {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Team K5 Construction & Development Coordination",
-    legalName: "Team K5 Construction and Development Coordination, LLC",
-    alternateName: "Team K5 C&D",
-    url: "https://bldpermit.com",
-    logo: "https://bldpermit.com/og-image.png",
-    telephone: "+1-407-469-5599",
-    email: "permitting@expeditepermit.com",
-    foundingDate: "2003",
-    areaServed: [
-      { "@type": "AdministrativeArea", name: "Central Florida" },
-      { "@type": "AdministrativeArea", name: "Tampa Bay" },
-      { "@type": "AdministrativeArea", name: "South Florida" },
-      { "@type": "Country", name: "United States" },
-    ],
-  } : route.type === "article" ? {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: route.title,
-    description: route.description,
-    datePublished: route.publishedTime,
-    dateModified: route.publishedTime,
-    mainEntityOfPage: canonical,
-    image: "https://bldpermit.com/og-image.png",
-    author: { "@type": "Organization", name: route.author },
-    publisher: {
-      "@type": "Organization",
-      name: "Team K5 Construction & Development Coordination",
-      logo: { "@type": "ImageObject", url: "https://bldpermit.com/og-image.png" },
-    },
-  } : null;
+  const structuredData = getStructuredData(pathname);
   let document = template
     .replace(/<title>.*?<\/title>/, `<title>${escape(route.title)}</title>`)
     .replace(/<meta name="description" content=".*?"\s*\/>/, `<meta name="description" content="${escape(route.description)}" />`)
@@ -71,7 +39,7 @@ function documentFor(route, pathname, robots = "index, follow") {
     const articleMeta = route.type === "article"
       ? `<meta property="article:published_time" content="${escape(route.publishedTime)}" />\n    <meta name="author" content="${escape(route.author)}" />\n    `
       : "";
-    document = document.replace("</head>", `${articleMeta}<script type="application/ld+json">${JSON.stringify(structuredData).replaceAll("<", "\\u003c")}</script>\n  </head>`);
+    document = document.replace("</head>", `${articleMeta}<script id="page-structured-data" type="application/ld+json">${JSON.stringify(structuredData).replaceAll("<", "\\u003c")}</script>\n  </head>`);
   }
   return document;
 }

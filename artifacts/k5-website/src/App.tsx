@@ -18,6 +18,7 @@ import { landingPages } from "@/landing-pages";
 import LandingPage from "@/pages/landing-page";
 import { canonicalUrl, getSeo, SOCIAL_IMAGE } from "@/seo";
 import { loadAnalytics, track, trackCurrentPage } from "@/analytics";
+import { getStructuredData } from "@/structured-data";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,19 @@ function SeoHead() {
     const seo = getSeo(location);
     const canonical = canonicalUrl(seo.path);
     document.title = seo.title;
+    const structuredData = getStructuredData(location);
+    let structuredScript = document.getElementById("page-structured-data");
+    if (structuredData) {
+      if (!structuredScript) {
+        structuredScript = document.createElement("script");
+        structuredScript.id = "page-structured-data";
+        structuredScript.setAttribute("type", "application/ld+json");
+        document.head.appendChild(structuredScript);
+      }
+      structuredScript.textContent = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
+    } else {
+      structuredScript?.remove();
+    }
 
     const values: Array<[string, string, string]> = [
       ["meta", 'name="description"', seo.description],
